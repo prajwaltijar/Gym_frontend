@@ -1,14 +1,19 @@
-import Hero from "./components/Hero";
-import Services from "./components/Services";
-import ContactForm from "./components/ContactForm";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
-    <div className="font-sans">
-      <Hero />
-      <Services />
-      <ContactForm />
-    </div>
+    <BrowserRouter>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
