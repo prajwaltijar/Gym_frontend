@@ -1,0 +1,39 @@
+import ServiceCard from "./ServiceCard";
+
+const Services = () => {
+  const services = [
+    {
+      title: "Personal Training",
+      description: "Customized workout plans with expert trainers.",
+      icon: "🏋️",
+    },
+    {
+      title: "Cardio & Strength",
+      description: "Build endurance and strength with modern equipment.",
+      icon: "🔥",
+    },
+    {
+      title: "Nutrition Guidance",
+      description: "Diet plans tailored to your fitness goals.",
+      icon: "🥗",
+    },
+  ];
+
+  return (
+    <section className="py-16 bg-gray-100">
+      <div className="max-w-6xl mx-auto px-6">
+        <h2 className="text-3xl font-bold text-center mb-12">
+          Our Services
+        </h2>
+
+        <div className="grid gap-8 md:grid-cols-3">
+          {services.map((service, index) => (
+            <ServiceCard key={index} {...service} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Services;
