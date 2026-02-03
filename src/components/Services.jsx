@@ -3,32 +3,44 @@ import ServiceCard from "./ServiceCard";
 const Services = () => {
   const services = [
     {
-      title: "Personal Training",
-      description: "Customized workout plans with expert trainers.",
-      icon: "🏋️",
+      title: "Personal Training 🏋️",
+      short: "One-on-one coaching",
+      description:
+        "Get customized workout plans and personal attention from certified trainers.",
     },
     {
-      title: "Cardio & Strength",
-      description: "Build endurance and strength with modern equipment.",
-      icon: "🔥",
+      title: "Cardio & Strength 🔥",
+      short: "Build stamina & muscle",
+      description:
+        "Modern machines and strength training programs to push your limits.",
     },
     {
-      title: "Nutrition Guidance",
-      description: "Diet plans tailored to your fitness goals.",
-      icon: "🥗",
+      title: "Nutrition Guidance 🥗",
+      short: "Eat smart",
+      description:
+        "Personalized diet plans designed to match your fitness goals.",
     },
   ];
 
   return (
-    <section className="py-16 bg-gray-100">
+    <section className="py-20 bg-gradient-to-b from-black to-gray-900 text-white">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-12">
-          Our Services
+        
+        <h2 className="text-4xl font-extrabold text-center mb-4 tracking-wide">
+          <span className="text-red-500">Our</span> Services
         </h2>
+        <p className="text-center text-gray-400 mb-14 max-w-xl mx-auto">
+          Everything you need to transform your body, boost confidence, and stay fit.
+        </p>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-10 md:grid-cols-3">
           {services.map((service, index) => (
-            <ServiceCard key={index} {...service} />
+            <div
+              key={index}
+              className="transform transition duration-300 hover:-translate-y-2 hover:scale-105"
+            >
+              <ServiceCard service={service} />
+            </div>
           ))}
         </div>
       </div>
