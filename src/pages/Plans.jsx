@@ -43,25 +43,25 @@ const Plans = () => {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white pt-10 pb-20">
+    <main className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white pt-12 pb-24">
       <div className="max-w-6xl mx-auto px-6">
         <header className="text-center mb-12">
           <p className="text-xs uppercase tracking-[0.2em] text-red-400 mb-2">
             Membership Plans
           </p>
-          <h1 className="text-3xl md:text-4xl font-extrabold mb-3">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
             Choose a plan that fits your journey
           </h1>
-          <p className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto">
+          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto">
             Start simple or go all in—each plan is designed to support you at a different stage of your fitness journey.
           </p>
         </header>
 
-        <section className="grid gap-8 md:grid-cols-3">
+        <section className="grid gap-10 md:grid-cols-3">
           {plans.map((plan) => (
             <article
               key={plan.name}
-              className={`relative rounded-2xl border bg-gray-900/70 p-6 shadow-xl transition-transform duration-300 hover:-translate-y-2 hover:shadow-red-500/20 ${
+              className={`relative rounded-2xl border bg-gray-900/70 p-7 md:p-8 shadow-xl transition-transform duration-300 hover:-translate-y-2 hover:shadow-red-500/20 ${
                 plan.highlight ? "border-red-600" : "border-gray-800"
               }`}
             >
@@ -71,15 +71,15 @@ const Plans = () => {
                 </span>
               )}
 
-              <h2 className="text-xl font-bold mb-1">{plan.name}</h2>
-              <p className="text-xs uppercase tracking-wide text-red-400 mb-4">
+              <h2 className="text-2xl font-bold mb-1">{plan.name}</h2>
+              <p className="text-sm uppercase tracking-wide text-red-400 mb-4">
                 {plan.tag}
               </p>
 
-              <p className="text-2xl font-extrabold mb-2">{plan.price}</p>
-              <p className="text-gray-300 text-sm mb-4">{plan.description}</p>
+              <p className="text-3xl font-extrabold mb-3">{plan.price}</p>
+              <p className="text-gray-300 text-base mb-5">{plan.description}</p>
 
-              <ul className="space-y-1 text-gray-300 text-sm mb-6">
+              <ul className="space-y-2 text-gray-300 text-base mb-7">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2">
                     <span className="mt-1 h-1.5 w-1.5 rounded-full bg-red-500" />
@@ -90,7 +90,7 @@ const Plans = () => {
 
               <button
                 type="button"
-                className="w-full rounded-full bg-red-600 py-2.5 text-sm font-semibold uppercase tracking-wide hover:bg-red-500 transition-colors"
+                className="w-full rounded-full bg-red-600 py-3 text-sm md:text-base font-semibold uppercase tracking-wide hover:bg-red-500 transition-colors shadow-lg shadow-red-500/30 hover:shadow-red-500/60"
               >
                 Join this plan
               </button>

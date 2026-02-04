@@ -10,15 +10,15 @@ const ServiceCard = ({ service }) => {
                  transition-all duration-300 hover:shadow-red-500/20 hover:border-red-500
                  hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-red-500/60"
     >
-      <h3 className="text-xl font-bold mb-2 text-white">
+      <h3 className="text-2xl font-bold mb-3 text-white">
         {title}
       </h3>
 
-      <p className="text-gray-400 text-sm">
+      <p className="text-gray-300 text-base leading-relaxed">
         {short}
       </p>
 
-      <p className="mt-4 text-red-400 text-xs font-semibold uppercase tracking-wide">
+      <p className="mt-5 text-red-400 text-sm font-semibold uppercase tracking-wide">
         View details →
       </p>
     </Link>
