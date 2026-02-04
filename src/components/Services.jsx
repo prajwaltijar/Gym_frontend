@@ -1,26 +1,7 @@
 import ServiceCard from "./ServiceCard";
+import { services } from "../data/services";
 
 const Services = () => {
-  const services = [
-    {
-      title: "Personal Training 🏋️",
-      short: "One-on-one coaching",
-      description:
-        "Get customized workout plans and personal attention from certified trainers.",
-    },
-    {
-      title: "Cardio & Strength 🔥",
-      short: "Build stamina & muscle",
-      description:
-        "Modern machines and strength training programs to push your limits.",
-    },
-    {
-      title: "Nutrition Guidance 🥗",
-      short: "Eat smart",
-      description:
-        "Personalized diet plans designed to match your fitness goals.",
-    },
-  ];
 
   return (
     <section className="py-20 bg-gradient-to-b from-black to-gray-900 text-white">

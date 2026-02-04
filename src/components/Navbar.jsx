@@ -28,6 +28,19 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
+            to="/plans"
+            className={({ isActive }) =>
+              `relative transition duration-300 ${
+                isActive
+                  ? "text-red-500 font-semibold"
+                  : "text-white hover:text-red-400"
+              } after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-red-500 after:w-0 hover:after:w-full after:transition-all after:duration-300`
+            }
+          >
+            Plans
+          </NavLink>
+
+          <NavLink
             to="/contact"
             className={({ isActive }) =>
               `relative transition duration-300 ${
