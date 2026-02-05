@@ -10,6 +10,7 @@ import About from "./pages/About";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminRoute from "./components/AdminRoute";
+import GymEquipment from "./pages/GymEquipment";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
+        <Route path='/equipment' element={<GymEquipment />} />
          <Route path="/admin/login" element={<AdminLogin />} />
          <Route
            path="/admin"
