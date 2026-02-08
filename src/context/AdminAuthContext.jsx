@@ -1,36 +1,29 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const AdminAuthContext = createContext(null);
-
-const ADMIN_USERNAME = "admin@gym.com";
-const ADMIN_PASSWORD = "admin123";
+const AdminAuthContext = createContext();
 
 export const AdminAuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  // page refresh hone par bhi login rahe
   useEffect(() => {
-    const stored = window.localStorage.getItem("pf_admin_authed");
-    if (stored === "true") {
-      setIsAuthenticated(true);
-    }
+    const saved = localStorage.getItem("adminAuth");
+    if (saved === "true") setIsAuthenticated(true);
   }, []);
 
-  const login = (username, password) => {
-    const ok =
-      username.trim().toLowerCase() === ADMIN_USERNAME &&
-      password === ADMIN_PASSWORD;
-
-    if (ok) {
+  const login = (email, password) => {
+    // demo credentials
+    if (email === "admin@gym.com" && password === "admin123") {
       setIsAuthenticated(true);
-      window.localStorage.setItem("pf_admin_authed", "true");
+      localStorage.setItem("adminAuth", "true");
+      return true;
     }
-
-    return ok;
+    return false;
   };
 
   const logout = () => {
     setIsAuthenticated(false);
-    window.localStorage.removeItem("pf_admin_authed");
+    localStorage.removeItem("adminAuth");
   };
 
   return (
@@ -40,10 +33,4 @@ export const AdminAuthProvider = ({ children }) => {
   );
 };
 
-export const useAdminAuth = () => {
-  const ctx = useContext(AdminAuthContext);
-  if (!ctx) {
-    throw new Error("useAdminAuth must be used within AdminAuthProvider");
-  }
-  return ctx;
-};
+export const useAdminAuth = () => useContext(AdminAuthContext);

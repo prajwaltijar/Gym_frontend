@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -10,30 +9,46 @@ import About from "./pages/About";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminRoute from "./components/AdminRoute";
-import GymEquipment from "./pages/GymEquipment";
+import ServicesPage from "./pages/ServicesPage";
+import ManagePlans from "./components/admin/ManagePlans";
 
-function App() {
+const Layout = () => {
+  const location = useLocation();
+  const isAdminPage = location.pathname.startsWith("/admin");
+
   return (
-    <BrowserRouter>
-      <Navbar />
+    <>
+      {!isAdminPage && <Navbar />}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/plans" element={<Plans />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/admin/plans" element={<ManagePlans />} />
+        <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
-        <Route path='/equipment' element={<GymEquipment />} />
-         <Route path="/admin/login" element={<AdminLogin />} />
-         <Route
-           path="/admin"
-           element={
-             <AdminRoute>
-               <AdminDashboard />
-             </AdminRoute>
-           }
-         />
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          }
+        />
       </Routes>
-        <Footer />
+
+      {!isAdminPage && <Footer />}
+    </>
+  );
+};
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Layout />
     </BrowserRouter>
   );
 }

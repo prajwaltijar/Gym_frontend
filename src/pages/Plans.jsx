@@ -1,3 +1,23 @@
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.25 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.7, ease: "easeOut" },
+  },
+};
+
 const Plans = () => {
   const plans = [
     {
@@ -43,9 +63,20 @@ const Plans = () => {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white pt-12 pb-24">
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white pt-12 pb-24"
+    >
       <div className="max-w-6xl mx-auto px-6">
-        <header className="text-center mb-12">
+        {/* HEADER */}
+        <motion.header
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-12"
+        >
           <p className="text-xs uppercase tracking-[0.2em] text-red-400 mb-2">
             Membership Plans
           </p>
@@ -55,20 +86,33 @@ const Plans = () => {
           <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto">
             Start simple or go all in—each plan is designed to support you at a different stage of your fitness journey.
           </p>
-        </header>
+        </motion.header>
 
-        <section className="grid gap-10 md:grid-cols-3">
+        {/* CARDS */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid gap-10 md:grid-cols-3"
+        >
           {plans.map((plan) => (
-            <article
+            <motion.article
               key={plan.name}
-              className={`relative rounded-2xl border bg-gray-900/70 p-7 md:p-8 shadow-xl transition-transform duration-300 hover:-translate-y-2 hover:shadow-red-500/20 ${
-                plan.highlight ? "border-red-600" : "border-gray-800"
+              variants={cardVariants}
+              whileHover={{ y: -12, scale: 1.03 }}
+              className={`relative rounded-2xl border bg-gray-900/70 p-7 md:p-8 shadow-xl ${{ true: "" }[true]} ${
+                plan.highlight ? "border-red-600 shadow-red-500/30" : "border-gray-800"
               }`}
             >
               {plan.highlight && (
-                <span className="absolute -top-3 left-6 rounded-full bg-red-600 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide">
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="absolute -top-3 left-6 rounded-full bg-red-600 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide"
+                >
                   Most Popular
-                </span>
+                </motion.span>
               )}
 
               <h2 className="text-2xl font-bold mb-1">{plan.name}</h2>
@@ -76,29 +120,47 @@ const Plans = () => {
                 {plan.tag}
               </p>
 
-              <p className="text-3xl font-extrabold mb-3">{plan.price}</p>
+              <motion.p
+                initial={{ scale: 0.95 }}
+                animate={{ scale: 1 }}
+                className="text-3xl font-extrabold mb-3"
+              >
+                {plan.price}
+              </motion.p>
+
               <p className="text-gray-300 text-base mb-5">{plan.description}</p>
 
               <ul className="space-y-2 text-gray-300 text-base mb-7">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2">
+                {plan.features.map((feature, i) => (
+                  <motion.li
+                    key={feature}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.08 }}
+                    className="flex items-start gap-2"
+                  >
                     <span className="mt-1 h-1.5 w-1.5 rounded-full bg-red-500" />
                     <span>{feature}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 
-              <button
+              <motion.button
                 type="button"
-                className="w-full rounded-full bg-red-600 py-3 text-sm md:text-base font-semibold uppercase tracking-wide hover:bg-red-500 transition-colors shadow-lg shadow-red-500/30 hover:shadow-red-500/60"
+                whileHover={{
+                  scale: 1.1,
+                  boxShadow: "0px 0px 25px rgba(239,68,68,0.7)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full rounded-full bg-red-600 py-3 text-sm md:text-base font-semibold uppercase tracking-wide hover:bg-red-500 transition-colors shadow-lg shadow-red-500/30"
               >
                 Join this plan
-              </button>
-            </article>
+              </motion.button>
+            </motion.article>
           ))}
-        </section>
+        </motion.section>
       </div>
-    </main>
+    </motion.main>
   );
 };
 
