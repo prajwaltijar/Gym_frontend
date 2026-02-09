@@ -1,60 +1,40 @@
-import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import api from "../api/aixos";
+import PlanCard from "../components/plans/PlanCard";
 
-const PlanForm = ({ service, setPlans, closeModal }) => {
-  const [oneMonth, setOneMonth] = useState("");
-  const [threeMonth, setThreeMonth] = useState("");
-  const [sixMonth, setSixMonth] = useState("");
+const PlansPage = () => {
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const { id } = useParams(); // serviceId
+  const [plans, setPlans] = useState([]);
 
-    const newPlan = {
-      service,
-      oneMonth,
-      threeMonth,
-      sixMonth,
-    };
-
-    setPlans(prev => [...prev, newPlan]);
-    closeModal(false);
-  };
+  useEffect(() => {
+    api.get(`/plans/service/${id}`)
+      .then(res => setPlans(res.data))
+      .catch(err => console.log(err));
+  }, [id]);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <div className="min-h-screen bg-black text-white py-20 px-6">
 
-      <h3 className="text-lg font-semibold mb-2">
-        {service} Plan
-      </h3>
+      <h1 className="text-3xl font-bold mb-10 text-center">
+        Available Plans
+      </h1>
 
-      <input
-        type="number"
-        placeholder="1 Month Price"
-        value={oneMonth}
-        onChange={(e)=>setOneMonth(e.target.value)}
-        className="w-full p-2 bg-black border"
-      />
+      {plans.length === 0 ? (
+        <p className="text-center text-gray-400">
+          No plans available for this service
+        </p>
+      ) : (
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {plans.map(plan => (
+            <PlanCard key={plan._id} plan={plan} />
+          ))}
+        </div>
+      )}
 
-      <input
-        type="number"
-        placeholder="3 Month Price"
-        value={threeMonth}
-        onChange={(e)=>setThreeMonth(e.target.value)}
-        className="w-full p-2 bg-black border"
-      />
-
-      <input
-        type="number"
-        placeholder="6 Month Price"
-        value={sixMonth}
-        onChange={(e)=>setSixMonth(e.target.value)}
-        className="w-full p-2 bg-black border"
-      />
-
-      <button className="bg-red-600 w-full py-2 rounded-lg">
-        Save Plan
-      </button>
-    </form>
+    </div>
   );
 };
 
-export default PlanForm;
+export default PlansPage;

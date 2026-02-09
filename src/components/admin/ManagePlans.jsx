@@ -4,41 +4,22 @@ import PlanCard from "../plans/PlanCard";
 import api from "../../api/aixos";
 
 const ManagePlans = ({ plans, setPlans }) => {
+
   const [showModal, setShowModal] = useState(false);
 
-  const fetchPlans = async () => {
+  // Load all plans initially
+  useEffect(() => {
+    fetchAllPlans();
+  }, []);
+
+  const fetchAllPlans = async () => {
     try {
       const res = await api.get("/plans/getplans");
       setPlans(res.data);
     } catch (err) {
-      console.error("Failed to fetch plans", err);
+      console.error(err);
     }
   };
-
-//   useEffect(() => {
-//     fetchPlans();
-//   }, []);
-
-//   useEffect(() => {
-//   if (!selectedService) return;
-
-//   const fetchServicePlans = async () => {
-//     const res = await api.get(`/plans/service/${selectedService._id}`);
-//     setPlans(res.data);
-//   };
-
-//   fetchServicePlans();
-// }, [selectedService]);
-
-const addPlan = async () => {
-  await api.post("/plans/create", {
-    name: newPlanName,
-    price: newPlanPrice,
-    service: selectedService._id
-  });
-
-  fetchServicePlans();
-};
 
   return (
     <div className="p-6 text-white">
@@ -56,7 +37,7 @@ const addPlan = async () => {
 
       <div className="grid md:grid-cols-3 gap-5">
         {plans.length === 0 && (
-          <p className="text-gray-400">No plans added</p>
+          <p className="text-gray-400">No plans available</p>
         )}
 
         {plans.map((plan) => (
@@ -67,7 +48,7 @@ const addPlan = async () => {
       {showModal && (
         <AddPlanModal
           setShowModal={setShowModal}
-          refreshPlans={fetchPlans}
+          refreshPlans={fetchAllPlans}
         />
       )}
     </div>

@@ -21,6 +21,7 @@ import { useEffect } from "react";
   }[plan] || "bg-gray-500/20 text-gray-300");
 
   const AdminDashboard = () => {
+    const [leads, setLeads] = useState([]);
   const [activeTab, setActiveTab] = useState("overview");
    const [showAdmissionForm, setShowAdmissionForm] = useState(false);
   const [admissions, setAdmissions] = useState([]);
@@ -30,10 +31,27 @@ import { useEffect } from "react";
   const [newPlanName, setNewPlanName] = useState("");
   const [newPlanPrice, setNewPlanPrice] = useState("");
 
-  const { logout } = useAdminAuth();
-  const navigate = useNavigate();
+  // const { logout } = useAdminAuth();
+  // const navigate = useNavigate();
 
-  const handleLogout = () => { logout(); navigate("/admin/login", { replace: true }); };
+  // const handleLogout = () => { logout(); navigate("/admin/login", { replace: true }); };
+
+  const { logout, isAuthenticated } = useAdminAuth();
+const navigate = useNavigate();
+
+// 🔒 AUTH GUARD
+useEffect(() => {
+  if (!isAuthenticated) {
+    navigate("/admin/login", { replace: true });
+  }
+}, [isAuthenticated, navigate]);
+
+// 🚪 LOGOUT
+const handleLogout = () => {
+  logout();
+  navigate("/", { replace: true });
+};
+
 
   // ================= FETCH ADMISSIONS FROM DB =================
 const fetchAdmissions = async () => {
@@ -45,9 +63,10 @@ const fetchAdmissions = async () => {
   }
 };
 
-useEffect(() => {
+  useEffect(() => {
   fetchAdmissions();
   fetchPlans();
+  fetchLeads();
 }, []);
 // ============================================================
 
@@ -60,6 +79,16 @@ const fetchPlans = async () => {
     console.error("Failed to fetch plans", err);
   }
 };
+//////////////////////////////////////////
+const fetchLeads = async () => {
+  try {
+    const res = await api.get("/leads/getleads");
+    setLeads(res.data);
+  } catch (err) {
+    console.error("Failed to fetch leads", err);
+  }
+};
+
 
 
     const handleAddAdmission = (e) => {
@@ -79,7 +108,7 @@ const fetchPlans = async () => {
   };
 
     const filtered = admissions.filter((a) =>
-  String(a?.name ?? "")
+   String(a?.name ?? "")
   .toLowerCase()
   .includes(String(search ?? "").toLowerCase())
 );
@@ -105,7 +134,12 @@ const fetchPlans = async () => {
           ))}
         </nav>
         <div className="p-4 border-t border-gray-800">
-          <button onClick={handleLogout} className="w-full border py-2 rounded-full">Logout</button>
+<button
+  onClick={handleLogout}
+  className="w-full border py-2 rounded-full"
+>
+  Logout
+</button>
         </div>
     </aside>
 
@@ -113,12 +147,13 @@ const fetchPlans = async () => {
         <h2 className="text-2xl font-bold mb-6">Admin Dashboard</h2>
 
         {activeTab==="overview" && (
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card title="Total Members" value={admissions.length}/>
-            <Card title="Active Plans" value={plans.length}/>
-            <Card title="Pending Admissions" value={admissions.filter(a=>a.status==="Pending").length}/>
-          </div>
-        )}
+  <div className="grid md:grid-cols-3 gap-6">
+    <Card title="Total Members" value={admissions.length}/>
+    <Card title="Active Plans" value={plans.length}/>
+    <Card title="New Leads" value={leads.filter(l=>l.status==="new").length}/>
+  </div>
+)}
+
 
         {activeTab==="admissions" && (
           <div className="bg-gray-900/60 border border-gray-800 rounded-2xl p-6 shadow-xl">
@@ -151,7 +186,12 @@ const fetchPlans = async () => {
               )}
 
               {filtered.map(member => (
-          <MemberCard key={member._id} member={member} />
+          <MemberCard
+  key={member._id}
+  member={member}
+  refresh={fetchAdmissions}
+/>
+
 ))}
 
         </motion.div>

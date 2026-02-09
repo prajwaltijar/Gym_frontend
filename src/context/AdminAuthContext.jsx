@@ -5,14 +5,13 @@ const AdminAuthContext = createContext();
 export const AdminAuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // page refresh hone par bhi login rahe
+  // refresh ke baad bhi login rahe
   useEffect(() => {
     const saved = localStorage.getItem("adminAuth");
     if (saved === "true") setIsAuthenticated(true);
   }, []);
 
   const login = (email, password) => {
-    // demo credentials
     if (email === "admin@gym.com" && password === "admin123") {
       setIsAuthenticated(true);
       localStorage.setItem("adminAuth", "true");
