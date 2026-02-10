@@ -1,22 +1,19 @@
-const PlanCard = ({ plan }) => {
+const PlanCard = ({ plan, hidePrice = false }) => {
   return (
-    <div className="bg-gray-900 p-5 rounded-xl border border-gray-800 hover:scale-105 transition">
+    <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl hover:scale-105 transition-transform">
 
-      <h3 className="text-xl font-semibold mb-2 text-white">
+      <h2 className="text-2xl font-bold mb-2">
         {plan.name}
-      </h3>
+      </h2>
 
-      <p className="text-gray-400 text-sm">
-        Duration : {plan.durationindays} Days
+      <p className="text-gray-400 text-sm mb-4">
+        {plan.description}
       </p>
 
-      <p className="text-red-500 text-lg font-bold mt-2">
-        ₹ {plan.price}
-      </p>
-
-      {plan.description && (
-        <p className="text-gray-300 text-sm mt-2">
-          {plan.description}
+      {/* PRICE — only when allowed */}
+      {!hidePrice && (
+        <p className="text-red-500 text-xl font-bold mt-3">
+          ₹{plan.price}
         </p>
       )}
 

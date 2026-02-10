@@ -1,47 +1,26 @@
-import { useState } from "react";
-
-const services = [
-  {
-    id: 1,
-    title: "Personal Training",
-    description: "One to one coaching with certified trainer for faster results.",
-    price: 2500
-  },
-  {
-    id: 2,
-    title: "Weight Loss Program",
-    description: "Structured fat loss workout and diet guidance program.",
-    price: 1800
-  },
-  {
-    id: 3,
-    title: "Muscle Gain Program",
-    description: "Hypertrophy based workout split for size & strength.",
-    price: 2200
-  },
-  {
-    id: 4,
-    title: "Zumba Classes",
-    description: "Fun dance cardio sessions for fitness and stamina.",
-    price: 1500
-  },
-  {
-    id: 5,
-    title: "Yoga Sessions",
-    description: "Flexibility, mobility and mental wellness training.",
-    price: 1200
-  },
-  {
-    id: 6,
-    title: "Diet Consultation",
-    description: "Custom meal plan based on your body goal.",
-    price: 1000
-  }
-];
+import { useState, useEffect } from "react";
+import api from "../api/aixos"; // tumhara axios instance
+import ServiceCard from "../components/ServiceCard";
 
 export default function ServicesPage() {
+  const [services, setServices] = useState([]);
   const [search, setSearch] = useState("");
 
+  // DB se services fetch
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await api.get("/services/getservices");
+        setServices(res.data);
+      } catch (err) {
+        console.error("Failed to load services", err);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+  // search filter
   const filtered = services.filter((service) =>
     service.title.toLowerCase().includes(search.toLowerCase())
   );
@@ -52,10 +31,12 @@ export default function ServicesPage() {
         <h1 className="text-4xl font-extrabold text-center mb-3">
           Our <span className="text-red-500">Services</span>
         </h1>
+
         <p className="text-center text-gray-400 mb-8">
           Choose the service that fits your fitness goal
         </p>
 
+        {/* Search */}
         <div className="flex justify-center mb-10">
           <input
             type="text"
@@ -66,21 +47,17 @@ export default function ServicesPage() {
           />
         </div>
 
+        {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((service) => (
-            <div
-              key={service.id}
-              className="bg-gray-900 border border-gray-800 rounded-2xl p-6 shadow-xl hover:scale-105 transition-transform"
-            >
-              <h2 className="text-2xl font-bold mb-2">{service.title}</h2>
-              <p className="text-gray-400 text-sm mb-5">{service.description}</p>
-
-              <div className="flex justify-between items-center">
-                <span className="text-gray-300">Price:</span>
-                <span className="text-red-500 text-xl font-bold">₹{service.price} / month</span>
-              </div>
-            </div>
-          ))}
+          {filtered.length > 0 ? (
+            filtered.map((service) => (
+              <ServiceCard key={service._id} service={service} />
+            ))
+          ) : (
+            <p className="text-center col-span-full text-gray-400">
+              No services found
+            </p>
+          )}
         </div>
       </div>
     </div>
