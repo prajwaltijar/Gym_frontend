@@ -1,11 +1,14 @@
 import Hero from "../components/Hero";
-import Services from "../components/Services";
+import ServicesSection from "../components/ServicesSection";
+import CTASection from '../components/CTASection';
+
 
 const Home = () => {
   return (
     <>
       <Hero />
-      <Services />
+      <ServicesSection />
+      <CTASection />
     </>
   );
 };

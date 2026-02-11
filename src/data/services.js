@@ -1,18 +1,25 @@
+import { GiWeightLiftingUp, GiRunningShoe, GiWhistle, GiBroccoli } from "react-icons/gi";
+import { FaUsers, FaSpa } from "react-icons/fa";
+
 export const services = [
   {
+    id: 1,
     slug: "personal-training",
-    title: "Personal Training 🏋️",
+    title: "Personal Training",
     short: "One-on-one coaching",
-    tagline:
-      "Dedicated 1:1 coaching, built fully around your lifestyle and goals.",
-    overview:
-      "Personal Training pairs you with a coach who learns your goals, current fitness level, and schedule, then builds a realistic but challenging plan just for you.",
-    approach:
-      "Sessions combine strength work, conditioning, and mobility so you move better, feel stronger, and avoid injuries. Every workout is planned in advance, so you walk into the gym knowing exactly what to do.",
+    description: "One-on-one coaching tailored to your goals, biomechanics, and lifestyle for rapid results with elite precision.",
+    image: null, // Placeholder background
+    icon: GiWhistle,
+    cta: "BOOK SESSION",
+    link: "/services/personal-training",
+    category: "Strength",
+    tagline: "Dedicated 1:1 coaching, built fully around your lifestyle and goals.",
+    overview: "Personal Training pairs you with a coach who learns your goals, current fitness level, and schedule, then builds a realistic but challenging plan just for you.",
+    approach: "Sessions combine strength work, conditioning, and mobility so you move better, feel stronger, and avoid injuries. Every workout is planned in advance, so you walk into the gym knowing exactly what to do.",
     benefits: [
       "Fully personalized workout programming that adapts as you progress",
       "Real-time form correction to keep you safe and efficient",
-      "Accountability and check-ins so you don’t fall off track",
+      "Accountability and check-ins so you don't fall off track",
       "Progress tracking with measurable milestones every few weeks",
     ],
     idealFor: [
@@ -22,15 +29,19 @@ export const services = [
     ],
   },
   {
-    slug: "cardio-strength",
-    title: "Cardio & Strength 🔥",
-    short: "Build stamina & muscle",
-    tagline:
-      "Structured cardio and lifting sessions to burn fat and build lean muscle.",
-    overview:
-      "Our Cardio & Strength program gives you a clear plan for combining machines, free weights, and functional training so you stop guessing and start progressing.",
-    approach:
-      "You’ll rotate through focused days for strength, conditioning, and recovery. Each session is scalable, with options for beginners and advanced members, so you always feel challenged without being overwhelmed.",
+    id: 2,
+    slug: "strength",
+    title: "Strength & Power",
+    short: "Build functional strength",
+    description: "Build functional strength with our hypertrophy and powerlifting programs. Raw iron and progressive overload.",
+    image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=1000&auto=format&fit=crop",
+    icon: GiWeightLiftingUp,
+    cta: "VIEW PROGRAM",
+    link: "/services/strength",
+    category: "Strength",
+    tagline: "Structured cardio and lifting sessions to burn fat and build lean muscle.",
+    overview: "Our Cardio & Strength program gives you a clear plan for combining machines, free weights, and functional training so you stop guessing and start progressing.",
+    approach: "You'll rotate through focused days for strength, conditioning, and recovery. Each session is scalable, with options for beginners and advanced members, so you always feel challenged without being overwhelmed.",
     benefits: [
       "Programs designed to increase strength, stamina, and work capacity",
       "Access to treadmills, bikes, rowers, free weights, and more",
@@ -44,15 +55,71 @@ export const services = [
     ],
   },
   {
-    slug: "nutrition-guidance",
-    title: "Nutrition Guidance 🥗",
-    short: "Eat smart",
-    tagline:
-      "Simple, sustainable nutrition coaching that actually fits real life.",
-    overview:
-      "Nutrition Guidance helps you turn food into a tool for better performance, fat loss, or muscle gain—without extreme diets or complicated rules.",
-    approach:
-      "We start from your current habits, schedule, and preferences, then layer in small, realistic changes. You’ll learn how to build balanced meals, understand portions, and navigate eating out or busy days without losing momentum.",
+    id: 3,
+    slug: "hiit",
+    title: "HIIT & Metabolic",
+    short: "High-intensity training",
+    description: "High-intensity cardiovascular training designed to torch calories and improve heart health through explosive intervals.",
+    image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1000&auto=format&fit=crop",
+    icon: GiRunningShoe,
+    cta: "JOIN CLASS",
+    link: "/services/hiit",
+    category: "Conditioning",
+    tagline: "Explosive interval training to maximize calorie burn and cardiovascular health.",
+    overview: "HIIT & Metabolic training combines short bursts of intense exercise with recovery periods to maximize fat burning and improve overall conditioning.",
+    approach: "Our classes vary between bodyweight movements, battle ropes, kettlebells, and cardio equipment to keep workouts fresh and challenging.",
+    benefits: [
+      "Torch calories in less time than traditional cardio",
+      "Boost metabolism for hours after your workout",
+      "Improve cardiovascular endurance and power",
+      "Build mental toughness and discipline",
+    ],
+    idealFor: [
+      "Anyone looking to maximize results in minimal time",
+      "Athletes seeking sport-specific conditioning",
+      "Members who thrive in high-energy environments",
+    ],
+  },
+  {
+    id: 4,
+    slug: "group",
+    title: "Group Performance",
+    short: "High-energy group training",
+    description: "High-energy group training sessions small enough to coach, intense enough to demand camaraderie and competitive spirit.",
+    image: "https://images.unsplash.com/photo-1534258936925-c58bed479fcb?q=80&w=1000&auto=format&fit=crop",
+    icon: FaUsers,
+    cta: "BROWSE SCHEDULE",
+    link: "/services/group",
+    category: "Conditioning",
+    tagline: "Train together, push harder, achieve more.",
+    overview: "Group Performance classes combine the energy of team training with expert coaching to push you beyond your limits.",
+    approach: "Small class sizes ensure individual attention while fostering a competitive, supportive atmosphere that drives results.",
+    benefits: [
+      "Motivation from training alongside like-minded athletes",
+      "Expert coaching with personalized modifications",
+      "Varied programming to prevent plateaus",
+      "Community accountability and support",
+    ],
+    idealFor: [
+      "People who thrive on group energy and competition",
+      "Members seeking accountability and community",
+      "Anyone looking for structured, coach-led workouts",
+    ],
+  },
+  {
+    id: 5,
+    slug: "nutrition",
+    title: "Elite Nutrition",
+    short: "Personalized meal planning",
+    description: "Personalized meal planning and macronutrient coaching integrated with your training cycle for optimal body composition.",
+    image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=1000&auto=format&fit=crop",
+    icon: GiBroccoli,
+    cta: "CONSULT NOW",
+    link: "/services/nutrition",
+    category: "Nutrition",
+    tagline: "Simple, sustainable nutrition coaching that actually fits real life.",
+    overview: "Nutrition Guidance helps you turn food into a tool for better performance, fat loss, or muscle gain—without extreme diets or complicated rules.",
+    approach: "We start from your current habits, schedule, and preferences, then layer in small, realistic changes. You'll learn how to build balanced meals, understand portions, and navigate eating out or busy days without losing momentum.",
     benefits: [
       "Customized guidelines for fat loss, muscle gain, or maintenance",
       "Habit-based coaching instead of rigid meal plans",
@@ -60,9 +127,35 @@ export const services = [
       "Ongoing tweaks based on progress, feedback, and energy levels",
     ],
     idealFor: [
-      "Members who train hard but aren’t seeing the results they want",
+      "Members who train hard but aren't seeing the results they want",
       "Anyone tired of yo-yo dieting and quick fixes",
       "People who want confidence about what and how much to eat",
+    ],
+  },
+  {
+    id: 6,
+    slug: "recovery",
+    title: "Advanced Recovery",
+    short: "Recovery & wellness",
+    description: "Access to infrared saunas, cryotherapy, and expert sports massage therapy for accelerated recovery and reset sports massage therapy.",
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1000&auto=format&fit=crop",
+    icon: FaSpa,
+    cta: "EXPLORE SPA",
+    link: "/services/recovery",
+    category: "Wellness",
+    tagline: "Advanced recovery modalities to optimize performance and reduce injury risk.",
+    overview: "Advanced Recovery services combine cutting-edge technology and expert therapy to help your body recover faster and perform better.",
+    approach: "Our recovery suite includes infrared saunas, compression therapy, and professional massage to reduce inflammation, improve circulation, and accelerate healing.",
+    benefits: [
+      "Reduce muscle soreness and speed up recovery",
+      "Improve flexibility and range of motion",
+      "Prevent injuries through proactive care",
+      "Enhance sleep quality and overall wellness",
+    ],
+    idealFor: [
+      "Athletes pushing their limits who need optimal recovery",
+      "Members dealing with chronic soreness or tightness",
+      "Anyone seeking holistic wellness beyond just training",
     ],
   },
 ];
