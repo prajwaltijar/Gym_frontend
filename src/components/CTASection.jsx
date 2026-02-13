@@ -54,7 +54,7 @@ const CTASection = () => {
                 >
                     <span className="text-white">READY TO </span>
                     <span
-                        className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent"
+                        className="bg-gradient-to-r from-yellow-300 to-yellow-600 bg-clip-text text-transparent"
                         style={{
                             fontStyle: "italic",
                             textShadow: "0 0 30px rgba(239, 68, 68, 0.5)"
@@ -87,7 +87,7 @@ const CTASection = () => {
                             boxShadow: "0px 0px 30px rgba(239, 68, 68, 0.8)"
                         }}
                         whileTap={{ scale: 0.95 }}
-                        className="px-8 py-4 bg-red-500 hover:bg-red-600 text-white font-bold text-sm md:text-base uppercase tracking-widest rounded-lg transition-all duration-300 shadow-lg"
+                        className="px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold text-sm md:text-base uppercase tracking-widest rounded-lg transition-all duration-300 shadow-lg"
                         style={{
                             boxShadow: "0 4px 20px rgba(239, 68, 68, 0.4)"
                         }}

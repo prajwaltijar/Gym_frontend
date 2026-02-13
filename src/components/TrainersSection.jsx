@@ -88,7 +88,7 @@ const TrainersSection = () => {
                         variants={headerVariants}
                         className="text-4xl md:text-5xl lg:text-6xl font-bold italic tracking-tight mb-4"
                     >
-                        MEET OUR <span className="border-b-4 border-red-500">ELITE TRAINERS</span>
+                        MEET OUR <span className="border-b-4 border-yellow-500">ELITE TRAINERS</span>
                     </motion.h2>
                     <motion.p
                         variants={headerVariants}
@@ -115,7 +115,7 @@ const TrainersSection = () => {
                                 transition: { duration: 0.3, ease: "easeOut" }
                             }}
                             className="group bg-gray-950 border border-gray-800 rounded-lg overflow-hidden 
-                         hover:border-red-500 transition-colors duration-300"
+                         hover:border-yellow-500 transition-colors duration-300"
                         >
                             {/* Trainer Image */}
                             <div className="relative h-72 overflow-hidden">
@@ -132,7 +132,7 @@ const TrainersSection = () => {
                                     initial={{ x: -100, opacity: 0 }}
                                     animate={isInView ? { x: 0, opacity: 1 } : { x: -100, opacity: 0 }}
                                     transition={{ delay: 0.5, duration: 0.5 }}
-                                    className="absolute bottom-4 left-4 bg-red-600 px-3 py-1 rounded"
+                                    className="absolute bottom-4 left-4 bg-yellow-500 px-3 py-1 rounded"
                                 >
                                     <p className="text-white text-xs font-bold uppercase tracking-wide">
                                         {trainer.specialtyTag}
@@ -160,7 +160,7 @@ const TrainersSection = () => {
                                         whileHover={{ scale: 1.05 }}
                                     >
                                         <motion.div
-                                            className="w-2 h-2 bg-red-500 rounded-full"
+                                            className="w-2 h-2 bg-yellow-500 rounded-full"
                                             animate={{
                                                 scale: [1, 1.3, 1],
                                                 opacity: [1, 0.7, 1]
@@ -179,7 +179,7 @@ const TrainersSection = () => {
                                     <motion.button
                                         whileHover={{ x: 5, scale: 1.1 }}
                                         whileTap={{ scale: 0.9 }}
-                                        className="text-red-500 hover:text-red-400 transition-colors"
+                                        className="text-yellow-500 hover:text-yellow-400 transition-colors"
                                         aria-label={`View ${trainer.name}'s profile`}
                                     >
                                         <svg

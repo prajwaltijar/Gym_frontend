@@ -15,7 +15,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 py-12 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2 space-y-4">
           <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">
-            <span className="text-red-500">Power</span>Fit Gym
+            <span className="text-yellow-400">Power</span>Fit Gym
           </h2>
           <p className="text-sm md:text-base text-gray-400 max-w-md leading-relaxed">
             A performance-driven gym focused on helping you build strength,
@@ -33,7 +33,7 @@ const Footer = () => {
               <NavLink
                 key={link.to}
                 to={link.to}
-                className="hover:text-red-400 transition-colors"
+                className="hover:text-yellow-400 transition-colors"
               >
                 {link.label}
               </NavLink>

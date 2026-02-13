@@ -23,7 +23,7 @@ export default function ServicesPage() {
               key={category}
               onClick={() => setActiveCategory(category)}
               className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${activeCategory === category
-                ? "bg-red-500 text-white"
+                ? "bg-yellow-400 text-white"
                 : "bg-gray-800 text-gray-400 hover:bg-gray-700"
                 }`}
             >
@@ -38,7 +38,7 @@ export default function ServicesPage() {
             <div
               key={service.id}
               className="group relative bg-gray-950 border border-gray-800 rounded-xl overflow-hidden 
-                         hover:border-red-500 transition-all duration-300 hover:-translate-y-2"
+                         hover:border-yellow-500 transition-all duration-300 hover:-translate-y-2"
             >
               {/* Service Image/Background */}
               <div className="relative h-64 overflow-hidden">
@@ -59,7 +59,7 @@ export default function ServicesPage() {
                 )}
 
                 {/* Icon Badge */}
-                <div className="absolute bottom-4 left-4 w-10 h-10 bg-red-500 rounded-full flex items-center justify-center text-white text-xl">
+                <div className="absolute bottom-4 left-4 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-white text-xl">
                   <service.icon className="w-6 h-6" />
                 </div>
 
@@ -80,7 +80,7 @@ export default function ServicesPage() {
                 {/* CTA Link */}
                 <Link
                   to={service.link}
-                  className="inline-flex items-center gap-2 text-red-500 font-semibold text-xs uppercase tracking-wide
+                  className="inline-flex items-center gap-2 text-yellow-500 font-semibold text-xs uppercase tracking-wide
                              hover:gap-3 transition-all duration-300"
                 >
                   {service.cta}

@@ -19,7 +19,7 @@ const Services = () => {
       <div className="max-w-6xl mx-auto px-6">
 
         <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-5 tracking-wide">
-          <span className="text-red-500">Our</span> Services
+          <span className="text-yellow-500">Our</span> Services
         </h2>
 
         <p className="text-center text-gray-300 text-lg md:text-xl mb-16 max-w-2xl mx-auto">

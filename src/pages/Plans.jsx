@@ -4,17 +4,16 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.25 },
+    transition: { staggerChildren: 0.12 },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  hidden: { opacity: 0, y: 25 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 0.7, ease: "easeOut" },
+    transition: { duration: 0.45, ease: "easeOut" },
   },
 };
 
@@ -41,9 +40,9 @@ const Plans = () => {
         "Level up your training with guidance, structure, and more support.",
       features: [
         "Everything in Starter",
-        "Monthly check-in with a trainer",
-        "Suggested weekly training split",
-        "Basic nutrition guidelines",
+        "Monthly trainer check-in",
+        "Training split guidance",
+        "Basic nutrition tips",
       ],
       highlight: true,
     },
@@ -55,9 +54,9 @@ const Plans = () => {
         "Work closely with a coach for custom training and nutrition support.",
       features: [
         "Everything in Progress",
-        "Weekly 1:1 personal training session",
-        "Fully customized training plan",
-        "Personalized nutrition strategy and adjustments",
+        "Weekly personal training",
+        "Custom workout plan",
+        "Personalized diet strategy",
       ],
     },
   ];
@@ -66,96 +65,69 @@ const Plans = () => {
     <motion.main
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white pt-12 pb-24"
+      className="min-h-screen bg-gray-50 pt-14 pb-24"
     >
       <div className="max-w-6xl mx-auto px-6">
+
         {/* HEADER */}
-        <motion.header
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-12"
-        >
-          <p className="text-xs uppercase tracking-[0.2em] text-red-400 mb-2">
+        <div className="text-center mb-14">
+          <p className="text-xs uppercase tracking-widest text-yellow-500 mb-2">
             Membership Plans
           </p>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-            Choose a plan that fits your journey
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black">
+            Choose Your Fitness Plan
           </h1>
-          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto">
-            Start simple or go all in—each plan is designed to support you at a different stage of your fitness journey.
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Pick the plan that suits your fitness goals and start your journey today.
           </p>
-        </motion.header>
+        </div>
 
         {/* CARDS */}
         <motion.section
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid gap-10 md:grid-cols-3"
+          className="grid gap-8 md:grid-cols-3"
         >
           {plans.map((plan) => (
             <motion.article
               key={plan.name}
               variants={cardVariants}
-              whileHover={{ y: -12, scale: 1.03 }}
-              className={`relative rounded-2xl border bg-gray-900/70 p-7 md:p-8 shadow-xl ${{ true: "" }[true]} ${
-                plan.highlight ? "border-red-600 shadow-red-500/30" : "border-gray-800"
+              className={`rounded-xl border p-7 bg-white shadow-sm hover:shadow-md transition ${
+                plan.highlight
+                  ? "border-yellow-400 scale-[1.03]"
+                  : "border-gray-200"
               }`}
             >
               {plan.highlight && (
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="absolute -top-3 left-6 rounded-full bg-red-600 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide"
-                >
+                <span className="inline-block mb-3 text-xs font-semibold uppercase text-yellow-600">
                   Most Popular
-                </motion.span>
+                </span>
               )}
 
-              <h2 className="text-2xl font-bold mb-1">{plan.name}</h2>
-              <p className="text-sm uppercase tracking-wide text-red-400 mb-4">
-                {plan.tag}
+              <h2 className="text-2xl font-bold text-black mb-1">
+                {plan.name}
+              </h2>
+              <p className="text-sm text-gray-500 mb-4">{plan.tag}</p>
+
+              <p className="text-3xl font-extrabold text-black mb-4">
+                {plan.price}
               </p>
 
-              <motion.p
-                initial={{ scale: 0.95 }}
-                animate={{ scale: 1 }}
-                className="text-3xl font-extrabold mb-3"
-              >
-                {plan.price}
-              </motion.p>
+              <p className="text-gray-600 mb-5">{plan.description}</p>
 
-              <p className="text-gray-300 text-base mb-5">{plan.description}</p>
-
-              <ul className="space-y-2 text-gray-300 text-base mb-7">
-                {plan.features.map((feature, i) => (
-                  <motion.li
-                    key={feature}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.08 }}
-                    className="flex items-start gap-2"
-                  >
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-red-500" />
-                    <span>{feature}</span>
-                  </motion.li>
+              <ul className="space-y-2 text-gray-700 mb-7">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-yellow-500" />
+                    {feature}
+                  </li>
                 ))}
               </ul>
 
-              <motion.button
-                type="button"
-                whileHover={{
-                  scale: 1.1,
-                  boxShadow: "0px 0px 25px rgba(239,68,68,0.7)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full rounded-full bg-red-600 py-3 text-sm md:text-base font-semibold uppercase tracking-wide hover:bg-red-500 transition-colors shadow-lg shadow-red-500/30"
-              >
-                Join this plan
-              </motion.button>
+              <button className="w-full bg-yellow-400 text-black py-2 rounded-md font-semibold hover:bg-yellow-300 transition">
+                Join Plan
+              </button>
             </motion.article>
           ))}
         </motion.section>
@@ -165,3 +137,4 @@ const Plans = () => {
 };
 
 export default Plans;
+``

@@ -69,7 +69,7 @@ const StatCard = ({ value, label, inView }) => {
       whileHover={{ scale: 1.05, y: -5 }}
       className="text-center"
     >
-      <motion.h3 className="text-5xl md:text-6xl font-bold text-red-500 mb-2">
+      <motion.h3 className="text-5xl md:text-6xl font-bold text-yellow-200 mb-2">
         {inView ? displayValue : value}
       </motion.h3>
       <p className="text-gray-400 text-xs md:text-sm uppercase tracking-widest">
@@ -102,7 +102,7 @@ const About = () => {
           className="mb-14 text-center"
         >
           <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-            <span className="text-red-500">About</span> PowerFit Gym
+            <span className="text-yellow-300">About</span> PowerFit Gym
           </h2>
         </motion.div>
 
@@ -146,7 +146,7 @@ const About = () => {
             whileHover={{ scale: 1.02 }}
             className="bg-white/5 backdrop-blur-md border border-white/10 p-10 rounded-xl text-center mb-16 shadow-2xl"
           >
-            <h3 className="text-3xl font-bold mb-4 text-red-500">Gym Timings</h3>
+            <h3 className="text-3xl font-bold mb-4 text-yellow-300">Gym Timings</h3>
             <p className="text-lg text-gray-300">Monday – Saturday: 5:30 AM – 10:30 PM</p>
             <p className="text-lg text-gray-300">Sunday: 7:00 AM – 2:00 PM</p>
           </motion.div>
@@ -165,7 +165,7 @@ const About = () => {
               className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-xl shadow-2xl"
               style={{ perspective: 1000 }}
             >
-              <h3 className="text-2xl font-bold mb-4 text-red-500">Our Mission</h3>
+              <h3 className="text-2xl font-bold mb-4 text-yellow-300">Our Mission</h3>
               <p className="text-gray-300">
                 Our mission is to make fitness simple and sustainable for everyone.
                 Whether you're a beginner or athlete, we guide you with proper
@@ -179,7 +179,7 @@ const About = () => {
               className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-xl shadow-2xl"
               style={{ perspective: 1000 }}
             >
-              <h3 className="text-2xl font-bold mb-4 text-red-500">Our Vision</h3>
+              <h3 className="text-2xl font-bold mb-4 text-yellow-300">Our Vision</h3>
               <p className="text-gray-300">
                 We aim to build a strong fitness community where people train
                 together, stay healthy and grow mentally & physically stronger

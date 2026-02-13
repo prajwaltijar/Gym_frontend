@@ -80,7 +80,7 @@ const ServicesSection = () => {
                 >
                     <motion.p
                         variants={headerVariants}
-                        className="text-red-500 text-sm md:text-base font-bold uppercase tracking-wider mb-4"
+                        className="text-yellow-300 text-sm md:text-base font-bold uppercase tracking-wider mb-4"
                     >
                         ELITE TRAINING
                     </motion.p>
@@ -120,7 +120,7 @@ const ServicesSection = () => {
                                 transition: { duration: 0.3, ease: "easeOut" }
                             }}
                             className="group relative bg-gray-950 border border-gray-800 rounded-lg overflow-hidden 
-                         hover:border-red-500 transition-colors duration-300"
+                         hover:border-yellow-500 transition-colors duration-300"
                         >
                             {/* Service Image */}
                             <div className="relative h-64 overflow-hidden">
@@ -164,7 +164,7 @@ const ServicesSection = () => {
                                         transition: { duration: 0.5 }
                                     }}
                                 >
-                                    <service.icon className="w-12 h-12 text-red-500" />
+                                    <service.icon className="w-12 h-12 text-yellow-500" />
                                 </motion.div>
 
                                 <h3 className="text-xl md:text-2xl font-bold mb-3 tracking-wide">
@@ -178,7 +178,7 @@ const ServicesSection = () => {
                                 {/* CTA Link */}
                                 <Link to={service.link}>
                                     <motion.div
-                                        className="inline-flex items-center gap-2 text-red-500 font-semibold text-sm uppercase tracking-wide"
+                                        className="inline-flex items-center gap-2 text-amber-300 font-semibold text-sm uppercase tracking-wide"
                                         whileHover={{ gap: "0.75rem" }}
                                         transition={{ duration: 0.3 }}
                                     >
