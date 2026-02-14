@@ -34,7 +34,7 @@ const MemberCard = ({ member, refresh }) => {
     <motion.div
       whileHover={{ y: -3 }}
       className="w-full h-full
-      bg-gradient-to-br from-gray-900/80 to-black/70
+      bg-gray-800
       border border-gray-800 backdrop-blur-xl
       rounded-2xl p-5 shadow-lg flex flex-col gap-4 h-full"
     >

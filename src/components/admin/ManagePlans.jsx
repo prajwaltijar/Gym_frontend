@@ -25,7 +25,7 @@ const ManagePlans = ({ plans, setPlans }) => {
     <div className="p-6 text-white">
 
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Manage Plans</h2>
+        <h2 className="text-2xl text-emerald-900 font-bold">Manage Plans</h2>
 
         <button
           onClick={() => setShowModal(true)}

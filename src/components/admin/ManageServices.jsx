@@ -64,11 +64,11 @@ const ManageServices = () => {
   };
 
   return (
-    <div className="bg-gray-900/60 border border-gray-800 rounded-2xl p-6 shadow-xl">
+    <div className="  border-gray-800 rounded-2xl p-6 shadow-xl">
 
       {/* HEADER */}
       <div className="flex justify-between items-center mb-5">
-        <h3 className="text-lg font-semibold">Services</h3>
+        <h3 className="text-xl text-green-900 font-semibold">Services</h3>
 
         <motion.button
           whileTap={{ scale: 0.9 }}
@@ -85,7 +85,7 @@ const ManageServices = () => {
       </div>
 
       {/* LIST */}
-      <div className="space-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2  gap-4">
         {services.length === 0 && (
           <p className="text-gray-400">No services available</p>
         )}
@@ -93,7 +93,7 @@ const ManageServices = () => {
         {services.map((s) => (
           <div
             key={s._id}
-            className="border border-gray-700 rounded-xl p-4 bg-black/40 flex justify-between items-center"
+className="border border-gray-700 rounded-xl p-4 bg-[#37463f] flex flex-col justify-between min-h-[130px]"
           >
             <div>
               <p className="font-semibold text-white">{s.title}</p>
@@ -102,18 +102,19 @@ const ManageServices = () => {
 
             <div className="flex gap-3">
               <button
-                onClick={() => handleEdit(s)}
-                className="px-4 py-1 bg-blue-600 rounded"
-              >
-                Edit
-              </button>
+            onClick={() => handleEdit(s)}
+            className="px-4 py-1.5 rounded-lg font-semibold text-blue-700 bg-blue-50 border border-blue-200 hover:bg-blue-100 active:scale-95 transition-all duration-200 shadow-sm hover:shadow"
+          >
+            Edit
+          </button>
 
-              <button
-                onClick={() => handleDelete(s._id)}
-                className="px-4 py-1 bg-red-700 rounded"
-              >
-                Delete
-              </button>
+          <button
+            onClick={() => handleDelete(s._id)}
+            className="px-4 py-1.5 rounded-lg font-semibold text-red-600 bg-red-100 border border-red-200 hover:bg-red-100 active:scale-95 transition-all duration-200 shadow-sm hover:shadow"
+          >
+            Delete
+          </button>
+
             </div>
           </div>
         ))}
