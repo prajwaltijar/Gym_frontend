@@ -11,7 +11,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminRoute from "./components/AdminRoute";
 import ServicesPage from "./pages/ServicesPage";
 import ManagePlans from "./components/admin/ManagePlans";
-
+import PlanDetails from "./components/plans/PlanDetails";
 const Layout = () => {
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith("/admin");
@@ -22,6 +22,7 @@ const Layout = () => {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/plans/:planName" element={<PlanDetails />} />
         <Route path="/plans" element={<Plans />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

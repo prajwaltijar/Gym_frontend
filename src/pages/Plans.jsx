@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -18,6 +20,8 @@ const cardVariants = {
 };
 
 const Plans = () => {
+  const navigate = useNavigate();
+
   const plans = [
     {
       name: "Starter",
@@ -125,9 +129,13 @@ const Plans = () => {
                 ))}
               </ul>
 
-              <button className="w-full bg-yellow-400 text-black py-2 rounded-md font-semibold hover:bg-yellow-300 transition">
-                Join Plan
-              </button>
+              <button
+  onClick={() => navigate(`/plans/${plan.name}`)}
+  className="w-full bg-yellow-400 text-black py-2 rounded-md font-semibold hover:bg-yellow-300 transition"
+>
+  Join Plan
+</button>
+
             </motion.article>
           ))}
         </motion.section>
