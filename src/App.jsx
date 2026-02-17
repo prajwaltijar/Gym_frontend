@@ -18,7 +18,11 @@ const Layout = () => {
 
   return (
     <>
-      {!isAdminPage && <Navbar />}
+      {!isAdminPage && <Navbar />
+      
+    
+      
+      }
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -38,6 +42,8 @@ const Layout = () => {
             <AdminRoute>
               <AdminDashboard />
             </AdminRoute>
+
+
           }
         />
       </Routes>

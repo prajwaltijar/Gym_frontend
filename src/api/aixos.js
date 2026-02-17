@@ -4,11 +4,11 @@ const api = axios.create({
   baseURL: "http://localhost:5000/api",
 });
 
-// token auto attach
+// 🔥 important interceptor
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("adminToken");
+  const token = localStorage.getItem("adminToken"); // same key jo login me store kiya
   if (token) {
-    config.headers["auth-token"] = token;   // 🔥 IMPORTANT (backend ye hi read kar raha)
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });

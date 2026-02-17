@@ -75,7 +75,7 @@ const Navbar = () => {
           ))}
 
           <NavLink to="/contact" onClick={() => setOpen(false)}>
-            <button className="w-full bg-yellow-400 text-black font-bold px-6 py-3 uppercase tracking-wider hover:bg-yellow-300 transition">
+            <button className="w-full bg-yellow-400 text-black font-bold px-6 py-3 uppercase tracking-wider hover:bg-yellow-300 transition rounded-sm">
               Contact
             </button>
           </NavLink>

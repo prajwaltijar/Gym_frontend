@@ -3,26 +3,28 @@ import { useNavigate } from "react-router-dom";
 import { useAdminAuth } from "../context/AdminAuthContext";
 
 const AdminLogin = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
   const { login, isAuthenticated } = useAdminAuth();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setError("");
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
 
-    const ok = login(username, password);
+  const ok = await login(email, password);
 
-    if (!ok) {
-      setError("Invalid admin credentials");
-      return;
-    }
+  if (!ok) {
+    setError("Invalid admin credentials");
+    return;
+  }
 
-    navigate("/admin", { replace: true });
-  };
+  navigate("/admin", { replace: true });
+};
+
+
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -39,12 +41,12 @@ const AdminLogin = () => {
         <h1 className="text-xl font-bold mb-4 text-center">Admin Login</h1>
 
         <input
-          type="email"
-          placeholder="admin@gym.com"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="w-full mb-3 p-2 rounded bg-black border"
-        />
+  type="email"
+  placeholder="admin@gym.com"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+/>
+
 
         <input
           type="password"

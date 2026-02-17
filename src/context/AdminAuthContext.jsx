@@ -1,32 +1,42 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import api from "../api/aixos";
 
 const AdminAuthContext = createContext();
 
 export const AdminAuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // refresh ke baad bhi login rahe
+  // check token on refresh
   useEffect(() => {
-    const saved = localStorage.getItem("adminAuth");
-    if (saved === "true") setIsAuthenticated(true);
+    const token = localStorage.getItem("adminToken");
+    if (token) setIsAuthenticated(true);
+    setLoading(false);
   }, []);
 
-  const login = (email, password) => {
-    if (email === "admin@gym.com" && password === "admin123") {
+  // 🔐 REAL LOGIN (backend)
+  const login = async (email, password) => {
+    try {
+      const res = await api.post("/auth/login", { email, password });
+
+      const token = res.data.token;
+
+      localStorage.setItem("adminToken", token);
       setIsAuthenticated(true);
-      localStorage.setItem("adminAuth", "true");
+
       return true;
+    } catch (err) {
+      return false;
     }
-    return false;
   };
 
   const logout = () => {
+    localStorage.removeItem("adminToken");
     setIsAuthenticated(false);
-    localStorage.removeItem("adminAuth");
   };
 
   return (
-    <AdminAuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AdminAuthContext.Provider value={{ isAuthenticated, login, logout, loading }}>
       {children}
     </AdminAuthContext.Provider>
   );

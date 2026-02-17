@@ -7,6 +7,8 @@ import MemberCard from "../components/admin/MemberCard";
 import ManageServices from "../components/admin/ManageServices";
 import { motion } from "framer-motion";
 import api from "../api/aixos";
+import ManageTrainer from "../components/admin/ManageTrainer";
+
 
 const Card = ({ title, value }) => (
   <div className="bg-gray-800 p-4 rounded-xl border border-gray-800">
@@ -15,9 +17,8 @@ const Card = ({ title, value }) => (
   </div>
 );
 
-
-
 const AdminDashboard = () => {
+  const [trainers, setTrainers] = useState([]);
   const [leads, setLeads] = useState([]);
   const [activeTab, setActiveTab] = useState("overview");
   const [showAdmissionForm, setShowAdmissionForm] = useState(false);
@@ -74,11 +75,22 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchTrainers = async () => {
+  try {
+    const res = await api.get("/trainers/getalltrainers");
+    setTrainers(res.data);
+  } catch (err) {
+    console.error("Failed to fetch trainers", err);
+  }
+};
+
+
   useEffect(() => {
     fetchAdmissions();
     fetchPlans();
     fetchLeads();
     fetchServices();
+    fetchTrainers(); 
   }, []);
 
   const filtered = admissions.filter((a) =>
@@ -95,34 +107,33 @@ const AdminDashboard = () => {
   <p className="text-xs text-yellow-500">Admin Dashboard</p>
 </div>
 
-
-
-
-
         <nav className="flex-1 px-4 py-4 space-y-1 text-sm">
-          {["overview", "admissions", "plans", "services"].map((tab) => (
+          {["overview", "admissions", "plans", "services","trainers"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`w-full text-left rounded-lg px-3 py-2 ${activeTab === tab ? "bg-red-600" : "hover:bg-gray-800/70"}`}
-
 
             >
               {tab === "overview" && "Overview"}
               {tab === "admissions" && "Admission List"}
               {tab === "plans" && "Manage Plans"}
               {tab === "services" && "Services"}
+              {tab === "trainers" && "Manage Trainers"}
+
             </button>
           ))}
         </nav>
 
-        <div className="p-4 border-t border-gray-800">
-          <button onClick={handleLogout} className="w-full text-amber-50 border py-2 rounded-full"
+        <div className="absolute top-6 right-6">
+  <button
+    onClick={handleLogout}
+    className="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-lg"
+  >
+    Logout
+  </button>
+</div>
 
->
-            Logout
-          </button>
-        </div>
       </aside>
 
       <section className="flex-1 p-6">
@@ -142,8 +153,6 @@ const AdminDashboard = () => {
         {activeTab === "admissions" && (
           <div className=" rounded-2xl p-6 shadow-xl">
             <div className=" border-gray-800 rounded-2xl p-6 shadow-xl">
-
-
               <h3 className="text-xl text-green-900 font-semibold">Members</h3>
               <div className="flex gap-3">
                 <input
@@ -152,6 +161,7 @@ const AdminDashboard = () => {
                   placeholder="Search member..."
                   className="bg-black/40 border border-gray-700 text-gray-100 rounded-lg px-3 py-2 text-sm"
 
+                
 
                 />
                 <motion.button
@@ -160,11 +170,12 @@ const AdminDashboard = () => {
                   onClick={() => setShowAdmissionForm(true)}
                   className="bg-yellow-600 px-5 py-2 md:ml-auto rounded-full text-sm shadow-lg shadow-red-600/30"
 
-
                 >
                   + Add Member
                 </motion.button>
               </div>
+
+              
             </div>
 
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3">
@@ -197,6 +208,11 @@ const AdminDashboard = () => {
         {activeTab === "services" && (
           <ManageServices services={services} refresh={fetchServices} />
         )}
+
+        {activeTab === "trainers" && (
+  <ManageTrainer trainers={trainers} refresh={fetchTrainers} />
+)}
+
       </section>
     </main>
   );

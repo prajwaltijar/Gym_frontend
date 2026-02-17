@@ -91,7 +91,7 @@ const About = () => {
   const ctaInView = useInView(ctaRef, { once: true, amount: 0.5 });
 
   return (
-    <section className="min-h-screen bg-black text-white">
+    <section className="min-h-screen mt-3 bg-black text-white">
       <div className=" mx-auto ">
 
         {/* Heading */}
@@ -108,7 +108,7 @@ const About = () => {
 
 
         {/* Statistics Section */}
-        <div ref={statsRef} className="mb-16 py-16 -mx-6 px-6">
+        <div ref={statsRef} className="mb-16 py-16  px-6">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
