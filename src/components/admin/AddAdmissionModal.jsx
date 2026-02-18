@@ -23,7 +23,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-const AddAdmissionModal = ({ isOpen, onClose, onAdded, plans }) => {
+const AddAdmissionModal = ({ isOpen, onClose, onAdded, plans, editData  }) => {
   const [form, setForm] = useState({
     customerName: "",
     mobile: "",
@@ -58,6 +58,22 @@ const AddAdmissionModal = ({ isOpen, onClose, onAdded, plans }) => {
     }));
   }, [form.planPrice, form.amountPaid]);
 
+  useEffect(() => {
+  if (!editData) return;
+
+  setForm({
+    customerName: editData.customerName || "",
+    mobile: editData.mobile || "",
+    plan: editData.plan?._id || "",
+    planPrice: editData.plan?.price || 0,
+    amountPaid: editData.amountPaid || "",
+    remainingAmount: editData.remainingAmount || 0,
+    paymentMode: editData.paymentMode || "Cash",
+    admittedAt: editData.admittedAt?.split("T")[0] || "",
+    note: editData.note || "",
+  });
+}, [editData]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,7 +88,12 @@ const AddAdmissionModal = ({ isOpen, onClose, onAdded, plans }) => {
         admittedAt: form.admittedAt
       };
 
-      await api.post("/admission/create", payload);
+      if (editData) {
+  await api.put(`/admission/update/${editData._id}`, payload);
+} else {
+  await api.post("/admission/create", payload);
+}
+
 
       onAdded(); // refresh list
       onClose();
@@ -104,7 +125,7 @@ const AddAdmissionModal = ({ isOpen, onClose, onAdded, plans }) => {
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-3"
+          className="fixed inset-0 bg-black/70 b flex items-center justify-center z-50 p-3"
         >
           <motion.form
             onSubmit={handleSubmit}
@@ -136,7 +157,7 @@ const AddAdmissionModal = ({ isOpen, onClose, onAdded, plans }) => {
 
               {/* PLAN SELECT */}
               <select
-                className="col-span-2 input"
+                className="col-span-2 input "
                 value={form.plan}
                 onChange={e => setForm({ ...form, plan: e.target.value })}
                 required
@@ -201,10 +222,10 @@ const AddAdmissionModal = ({ isOpen, onClose, onAdded, plans }) => {
             </div>
 
             <div className="flex gap-2 pt-2">
-              <button type="button" onClick={onClose} className="flex-1 border py-2 rounded">
+              <button type="button" onClick={onClose} className="flex-1 border hover:scale-105 hover:bg-gray-600 py-2 rounded">
                 Cancel
               </button>
-              <button className="flex-1 bg-red-600 py-2 rounded">
+              <button className="flex-1 bg-red-800 hover:scale-105 hover:bg-red-400 py-2 rounded">
                 Save
               </button>
             </div>

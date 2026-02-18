@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import api from "../../api/aixos";
 
-const MemberCard = ({ member, refresh }) => {
+const MemberCard = ({ member, refresh, onEdit }) => {
 
   // ===== DAYS REMAINING CALCULATION =====
   const calculateDaysLeft = () => {
@@ -32,16 +32,14 @@ const MemberCard = ({ member, refresh }) => {
 
   return (
     <motion.div
-      whileHover={{ y: -3 }}
       className="w-full h-full
-      bg-gray-800
+      bg-[#223044] hover:scale-102
       border border-gray-800 backdrop-blur-xl
-      rounded-2xl p-5 shadow-lg flex flex-col gap-4 h-full"
+      rounded-2xl p-5 shadow-lg flex flex-col gap-6 h-full"
     >
-      {/* LEFT SIDE */}
+
       <div className="flex-1 space-y-2">
 
-        {/* Name + Status */}
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-bold text-white tracking-wide">
             {member.customerName}
@@ -61,10 +59,8 @@ const MemberCard = ({ member, refresh }) => {
           )}
         </div>
 
-        {/* Phone */}
         <p className="text-gray-400 text-sm">📱 {member.mobile}</p>
 
-        {/* Plan */}
         <p className="text-sm">
           Plan:
           <span className="ml-2 text-white font-medium">
@@ -72,12 +68,10 @@ const MemberCard = ({ member, refresh }) => {
           </span>
         </p>
 
-        {/* Join Date */}
         <p className="text-gray-400 text-sm">
           Joined: {new Date(member.admittedAt).toLocaleDateString("en-IN")}
         </p>
 
-        {/* Progress bar */}
         {daysLeft !== null && (
           <div className="pt-2">
             <div className="flex justify-between text-xs mb-1 text-gray-400">
@@ -102,7 +96,6 @@ const MemberCard = ({ member, refresh }) => {
           </div>
         )}
 
-        {/* Amount section */}
         <div className="flex gap-4 pt-3 text-sm">
           <div className="bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 rounded-lg">
             <p className="text-gray-400 text-xs">Paid</p>
@@ -120,9 +113,10 @@ const MemberCard = ({ member, refresh }) => {
         </div>
       </div>
 
-      {/* RIGHT BUTTONS */}
+      {/* BUTTONS */}
       <div className="mt-auto flex gap-3 w-full">
         <button
+          onClick={() => onEdit(member)}
           className="flex-1 px-4 py-2 rounded-xl text-sm font-medium
           bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 transition"
         >
