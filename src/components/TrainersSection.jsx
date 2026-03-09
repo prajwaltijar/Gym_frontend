@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import api from "../api/aixos";
+import api from "../api/axios";
 
 // animation variants
 const containerVariants = {

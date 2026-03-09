@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import api from "../api/aixos";
+import api from "../api/axios";
 import PlanCard from "../components/plans/PlanCard";
 
 const ServiceDetail = () => {

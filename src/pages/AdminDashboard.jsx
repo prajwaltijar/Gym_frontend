@@ -6,9 +6,9 @@ import ManagePlans from "../components/admin/ManagePlans";
 import MemberCard from "../components/admin/MemberCard";
 import ManageServices from "../components/admin/ManageServices";
 import { motion } from "framer-motion";
-import api from "../api/aixos";
+import api from "../api/axios";
 import ManageTrainer from "../components/admin/ManageTrainer";
-
+import ManageLeads from "../components/admin/ManageLeads";
 
 const Card = ({ title, value }) => (
   <div className="bg-gray-800 p-4 rounded-xl border border-gray-800">
@@ -19,12 +19,18 @@ const Card = ({ title, value }) => (
 
 const AdminDashboard = () => {
   const [trainers, setTrainers] = useState([]);
-  const [leads, setLeads] = useState([]);
+  // const [leads, setLeads] = useState([]);
   const [activeTab, setActiveTab] = useState("overview");
   const [showAdmissionForm, setShowAdmissionForm] = useState(false);
   const [admissions, setAdmissions] = useState([]);
   const [plans, setPlans] = useState([]);
+  const [paymentFilter, setPaymentFilter] = useState("all");
   const [services, setServices] = useState([]);
+  const [counts, setCounts] = useState({
+  total: 0,
+  newLeads: 0,
+  contacted: 0
+});
   const [search, setSearch] = useState("");
 const [editingMember, setEditingMember] = useState(null);
 
@@ -52,20 +58,22 @@ const [editingMember, setEditingMember] = useState(null);
   const fetchPlans = async () => {
     try {
       const res = await api.get("/plans/getplans");
+      console.log("🔥 PLANS API RESPONSE:", res.data); 
       setPlans(res.data);
+
     } catch (err) {
       console.error("Failed to fetch plans", err);
     }
   };
 
-  const fetchLeads = async () => {
-    try {
-      const res = await api.get("/leads/getleads");
-      setLeads(res.data);
-    } catch (err) {
-      console.error("Failed to fetch leads", err);
-    }
-  };
+  // const fetchLeads = async () => {
+  //   try {
+  //     const res = await api.get("/leads/getleads");
+  //     setLeads(res.data);
+  //   } catch (err) {
+  //     console.error("Failed to fetch leads", err);
+  //   }
+  // };
 
   const fetchServices = async () => {
     try {
@@ -85,25 +93,42 @@ const [editingMember, setEditingMember] = useState(null);
   }
 };
 
+const fetchLeadCount = async () => {
+  try {
+    const res = await api.get("/leads/count");
+    setCounts(res.data);
+  } catch (err) {
+    console.error("Failed to fetch lead count", err);
+  }
+};
+
 
   useEffect(() => {
     fetchAdmissions();
     fetchPlans();
-    fetchLeads();
+   /// fetchLeads();
     fetchServices();
-    fetchTrainers(); 
+    fetchTrainers();
+    fetchLeadCount(); 
   }, []);
 
   const filtered = admissions.filter((a) => {
   const keyword = search.toLowerCase();
 
-  return (
+  const matchesSearch =
     String(a?.customerName || "").toLowerCase().includes(keyword) ||
     String(a?.mobile || "").toLowerCase().includes(keyword) ||
     String(a?.paymentMode || "").toLowerCase().includes(keyword) ||
-    String(a?.note || "").toLowerCase().includes(keyword)
-  );
+    String(a?.note || "").toLowerCase().includes(keyword);
+
+  const matchesPayment =
+    paymentFilter === "all" ||
+    (paymentFilter === "paid" && a.remainingAmount === 0) ||
+    (paymentFilter === "unpaid" && a.remainingAmount > 0);
+
+  return matchesSearch && matchesPayment;
 });
+
 
   return (
    <main className="min-h-screen bg-[#0B192C]  flex">
@@ -116,7 +141,7 @@ const [editingMember, setEditingMember] = useState(null);
 </div>
 
         <nav className="flex-1 px-4 py-4 space-y-1 text-sm">
-          {["overview", "admissions", "plans", "services","trainers"].map((tab) => (
+          {["overview", "admissions", "plans", "services","trainers","leads"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -128,6 +153,7 @@ const [editingMember, setEditingMember] = useState(null);
               {tab === "plans" && "Manage Plans"}
               {tab === "services" && "Services"}
               {tab === "trainers" && "Manage Trainers"}
+              {tab === "leads" && "Manage Leads"}
 
             </button>
           ))}
@@ -154,10 +180,14 @@ const [editingMember, setEditingMember] = useState(null);
           <div className="grid md:grid-cols-3 gap-6">
             <Card title="Total Members" value={admissions.length} />
             <Card title="Active Plans" value={plans.length} />
-            <Card title="New Leads" value={leads.filter((l) => l.status === "new").length} />
-          </div>
+            <Card title="Total Services" value={services.length} />
+            <Card title="Total Trainers" value={trainers.length} />
+            <Card title="New Leads" value={counts.newLeads} />  
+                    </div>
         )}
 
+        {activeTab === "leads" && <ManageLeads />}
+        
         {activeTab === "admissions" && (
           <div className=" rounded-2xl p-6 shadow-xl">
             <div className=" border-gray-800 rounded-2xl p-6 shadow-xl">
@@ -172,6 +202,43 @@ const [editingMember, setEditingMember] = useState(null);
                 
 
                 />
+
+                <div className="flex gap-3 mt-3">
+
+  <button
+    onClick={() => setPaymentFilter("all")}
+    className={`px-4 py-2 rounded-lg text-sm ${
+      paymentFilter === "all"
+        ? "bg-gray-600"
+        : "bg-gray-800 hover:bg-gray-700"
+    }`}
+  >
+    All ({admissions.length})
+  </button>
+
+  <button
+    onClick={() => setPaymentFilter("paid")}
+    className={`px-4 py-2 rounded-lg text-sm ${
+      paymentFilter === "paid"
+        ? "bg-green-600"
+        : "bg-gray-800 hover:bg-gray-700"
+    }`}
+  >
+    Paid ({admissions.filter(a => a.remainingAmount === 0).length})
+  </button>
+
+  <button
+    onClick={() => setPaymentFilter("unpaid")}
+    className={`px-4 py-2 rounded-lg text-sm ${
+      paymentFilter === "unpaid"
+        ? "bg-red-600"
+        : "bg-gray-800 hover:bg-gray-700"
+    }`}
+  >
+    Unpaid ({admissions.filter(a => a.remainingAmount > 0).length})
+  </button>
+
+</div>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.9 }}

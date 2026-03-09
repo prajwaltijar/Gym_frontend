@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import AddPlanModal from "../plans/AddPlanModal";
 import PlanCard from "../plans/PlanCard";
-import api from "../../api/aixos";
+import api from "../../api/axios";
 
 const ManagePlans = ({ plans, setPlans }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [search, setSearch] = useState("");
   const [filteredPlans, setFilteredPlans] = useState([]);
-
+  const [editingPlan, setEditingPlan] = useState(null);
   // Load all plans initially
   useEffect(() => {
     fetchAllPlans();
@@ -47,6 +47,14 @@ const ManagePlans = ({ plans, setPlans }) => {
         </button>
       </div>
 
+      {editingPlan && (
+  <AddPlanModal
+    setShowModal={() => setEditingPlan(null)}
+    refreshPlans={fetchAllPlans}
+    editData={editingPlan}
+  />
+)}
+
       {/* 🔍 Search Bar */}
       <input
         type="text"
@@ -58,7 +66,6 @@ const ManagePlans = ({ plans, setPlans }) => {
 
       {/* Plans Grid */}
       <div className="grid md:grid-cols-3 gap-5">
-
         {/* Empty state */}
         {filteredPlans.length === 0 && (
           <p className="text-gray-300 text-3xl col-span-full text-center py-10">
@@ -67,9 +74,15 @@ const ManagePlans = ({ plans, setPlans }) => {
         )}
 
         {/* Plans List */}
-        {filteredPlans.map((plan) => (
-          <PlanCard key={plan._id} plan={plan} />
-        ))}
+      {filteredPlans.map((plan) => (
+  <PlanCard
+    key={plan._id}
+    plan={plan}
+    refreshPlans={fetchAllPlans}
+    isAdmin={true}
+    onEdit={setEditingPlan}
+  />
+))}
 
       </div>
 

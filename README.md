@@ -1,5 +1,3 @@
-# React + Vite
-
 # 💪 FitZone – Modern Gym Web Application
 
 FitZone is a modern **Gym Landing Page Web Application** built using the **MERN Stack**.  
@@ -32,40 +30,38 @@ The project also includes an **Admin Dashboard** where the admin can manage lead
 ---
 
 # 📂 Project Structure
-
-```
 src
- ├── api
- ├── assets
- ├── components
- │   ├── admin
- │   ├── plans
- │   ├── Hero.jsx
- │   ├── Services.jsx
- │   ├── TrainerSection.jsx
- │   ├── ContactForm.jsx
- │   └── Footer.jsx
- │
- ├── context
- │   └── AdminAuthContext.jsx
- │
- ├── data
- │   └── services.js
- │
- ├── pages
- │   ├── Home.jsx
- │   ├── About.jsx
- │   ├── Plans.jsx
- │   ├── ServicesPage.jsx
- │   ├── ServiceDetail.jsx
- │   ├── Contact.jsx
- │   ├── AdminLogin.jsx
- │   └── AdminDashboard.jsx
- │
- ├── App.jsx
- ├── main.jsx
- └── index.css
-```
+├── api
+├── assets
+├── components
+│ ├── admin
+│ ├── plans
+│ ├── Hero.jsx
+│ ├── Services.jsx
+│ ├── TrainerSection.jsx
+│ ├── ContactForm.jsx
+│ └── Footer.jsx
+│
+├── context
+│ └── AdminAuthContext.jsx
+│
+├── data
+│ └── services.js
+│
+├── pages
+│ ├── Home.jsx
+│ ├── About.jsx
+│ ├── Plans.jsx
+│ ├── ServicesPage.jsx
+│ ├── ServiceDetail.jsx
+│ ├── Contact.jsx
+│ ├── AdminLogin.jsx
+│ └── AdminDashboard.jsx
+│
+├── App.jsx
+├── main.jsx
+└── index.css
+
 
 ---
 
@@ -109,22 +105,20 @@ src
 # ⚙️ Installation
 
 ### Clone the repository
-
-```
 git clone https://github.com/prajwaltijar/Gym_frontend.git
-```
+
 
 ### Install dependencies
 
-```
+
 npm install
-```
+
 
 ### Run the project
 
-```
+
 npm run dev
-```
+
 
 ---
 

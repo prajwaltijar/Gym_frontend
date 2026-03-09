@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import api from "../api/aixos";
+import api from "../api/axios";
 
 const AdminAuthContext = createContext();
 
@@ -12,8 +12,7 @@ export const AdminAuthProvider = ({ children }) => {
     const token = localStorage.getItem("adminToken");
     if (token) setIsAuthenticated(true);
     setLoading(false);
-  }, []);
-
+  }, []); 
   // 🔐 REAL LOGIN (backend)
   const login = async (email, password) => {
     try {

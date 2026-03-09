@@ -1,5 +1,5 @@
 import { useState } from "react";
-import api from "../../api/aixos";
+import api from "../../api/axios";
 import { motion } from "framer-motion";
 
 const ManageTrainer = ({ trainers, refresh }) => {
@@ -14,7 +14,7 @@ const ManageTrainer = ({ trainers, refresh }) => {
     name: "",
     specialty: "",
     experience: "",
-    bio: ""
+    bio: "",
   });
 
   const handleChange = (e) =>

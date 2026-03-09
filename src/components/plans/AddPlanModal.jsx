@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import api from "../../api/aixos";
+import api from "../../api/axios";
 
-const AddPlanModal = ({ setShowModal, refreshPlans }) => {
+const AddPlanModal = ({ setShowModal, refreshPlans, editData }) => {
 
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -13,6 +13,18 @@ const AddPlanModal = ({ setShowModal, refreshPlans }) => {
     price: "",
     description: ""
   });
+
+  useEffect(() => {
+  if (editData) {
+    setForm({
+      service: editData.service?._id || editData.service,
+      name: editData.name,
+      durationindays: editData.durationindays,
+      price: editData.price,
+      description: editData.description
+    });
+  }
+}, [editData]);
 
   // ================= FETCH SERVICES =================
   useEffect(() => {
@@ -33,39 +45,39 @@ const AddPlanModal = ({ setShowModal, refreshPlans }) => {
   };
 
   // ================= SUBMIT =================
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!form.service) {
-      alert("Please select a service");
-      return;
-    }
+  try {
+    setLoading(true);
 
-    try {
-      setLoading(true);
-
+    if (editData) {
+      // UPDATE
+      await api.put(`/plans/updateplan/${editData._id}`, form);
+    } else {
+      // CREATE
       await api.post("/plans/createplan", {
         ...form,
         durationindays: Number(form.durationindays),
         price: Number(form.price)
       });
-
-      await refreshPlans();
-      setShowModal(false);
-
-    } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || "Failed to create plan");
-    } finally {
-      setLoading(false);
     }
-  };
 
+    await refreshPlans();
+    setShowModal(false);
+
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
 
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit}b
         className="bg-gray-900 p-6 rounded-xl w-96 space-y-4 border border-gray-700"
       >
 

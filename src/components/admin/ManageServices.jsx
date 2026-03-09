@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../../api/aixos";
+import api from "../../api/axios";
 import { motion, AnimatePresence } from "framer-motion";
 
 const BASE = "http://localhost:5000"; // backend url
@@ -258,50 +258,60 @@ export default function ManageServices() {
       </AnimatePresence>
 
       {/* ================= List ================= */}
-      <div className="grid md:grid-cols-3 gap-6">
+      {/* ================= List ================= */}
+<div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 px-5">
 
-        {filteredServices.length === 0 && (
-  <p className="text-center col-span-full text-3xl text-gray-300 py-10">
-    No services found
-  </p>
-)}
-
-        {filteredServices.map((s) => (
-
-          <div key={s._id} className="bg-gray-800 rounded-xl overflow-hidden border border-zinc-700 hover:scale-105 transition">
-            <div className="w-full aspect-[4/3]  flex items-center justify-center overflow-hidden">
-  {getImageUrl(s.image) && (
-    <img
-      src={getImageUrl(s.image)}
-      alt={s.title}
-      className="max-h-full max-w-full object-contain"
-    />
+  {filteredServices.length === 0 && (
+    <p className="text-center text-3xl text-gray-300 py-10 col-span-full">
+      No services found
+    </p>
   )}
-</div>
 
-            <div className="p-4 space-y-2">
-              <h4 className="text-lg font-bold">{s.title}</h4>
-              <p className="text-sm text-zinc-300">{s.description}</p>
-              <div className="flex gap-2 pt-2">
-                <button
-                  onClick={() => handleEdit(s)}
-                  className="flex-1 px-4 py-2 rounded-xl text-sm font-medium
-          bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 transition"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(s._id)}
-                  className="flex-1 px-4 py-2 rounded-xl text-sm font-medium
-          bg-red-500/20 text-red-300 hover:bg-red-500/30 transition"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+  {filteredServices.map((s) => (
+    <motion.div
+      key={s._id}
+      whileHover={{ scale: 1.03 }}
+      className="bg-gray-800 text-white rounded-2xl overflow-hidden flex flex-col h-full"
+    >
+      {/* Image */}
+      <div className="w-full aspect-[4/3] bg-gray-700">
+        {getImageUrl(s.image) && (
+          <img
+            src={getImageUrl(s.image)}
+            alt={s.title}
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
+
+      {/* Content */}
+      <div className="p-5 flex flex-col flex-1 space-y-2">
+        <h4 className="text-lg font-bold">{s.title}</h4>
+        <p className="text-xs text-gray-300 line-clamp-3">
+          {s.description}
+        </p>
+
+        <div className="flex gap-2 pt-4 mt-auto">
+          <button
+            onClick={() => handleEdit(s)}
+            className="flex-1 px-4 py-2 rounded-xl text-sm font-medium 
+            bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 transition"
+          >
+            Edit
+          </button>
+
+          <button
+            onClick={() => handleDelete(s._id)}
+            className="flex-1 px-4 py-2 rounded-xl text-sm font-medium 
+            bg-red-500/20 text-red-300 hover:bg-red-500/30 transition"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  ))}
+</div>
     </div>
   );
 }

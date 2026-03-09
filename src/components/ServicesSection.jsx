@@ -76,7 +76,7 @@ const ServicesSection = () => {
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
                     variants={containerVariants}
-                    className="mb-16"
+                    className="mb-16 "
                 >
                     <motion.p
                         variants={headerVariants}
