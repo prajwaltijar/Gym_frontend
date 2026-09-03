@@ -1,5 +1,5 @@
 import { useState } from "react";
-import api from "../../api/axios";
+import api, { API_BASE_URL } from "../../api/axios";
 import { motion } from "framer-motion";
 
 const ManageTrainer = ({ trainers, refresh }) => {
@@ -60,7 +60,7 @@ const ManageTrainer = ({ trainers, refresh }) => {
       experience: trainer.experience,
       bio: trainer.bio
     });
-    setPreview(`http://localhost:5000/uploads/trainers/${trainer.image}`);
+    setPreview(`${API_BASE_URL}/uploads/trainers/${trainer.image}`);
     setOpen(true);
   };
 
@@ -140,7 +140,7 @@ const ManageTrainer = ({ trainers, refresh }) => {
           >
             <div className="w-full aspect-[4/3] bg-gray-700">
               <img
-                src={`http://localhost:5000/uploads/trainers/${t.image}`}
+                src={`${API_BASE_URL}/uploads/trainers/${t.image}`}
                 alt="trainer"
                 className="w-full h-full object-cover"
               />

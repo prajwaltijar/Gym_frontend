@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import api from "../../api/axios";
+import api, { API_BASE_URL } from "../../api/axios";
 import { motion, AnimatePresence } from "framer-motion";
-
-const BASE = "http://localhost:5000"; // backend url
 
 const getImageUrl = (img) => {
   if (!img) return null;
   if (img.startsWith("http")) return img; // already full url
-  return `${BASE}${img}`; // add server path
+  return `${API_BASE_URL}${img}`; // add server path
 };
 
 export default function ManageServices() {

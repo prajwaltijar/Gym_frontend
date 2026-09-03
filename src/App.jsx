@@ -33,17 +33,16 @@ const Layout = () => {
         <Route path="/admin/plans" element={<ManagePlans />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
+        <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/service/:id" element={<ServiceDetail />} />
 
         <Route
-          path="/admin"
+          path="/admin/dashboard"
           element={
             <AdminRoute>
               <AdminDashboard />
             </AdminRoute>
-
-
           }
         />
       </Routes>

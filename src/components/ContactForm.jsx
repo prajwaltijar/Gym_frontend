@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { API_BASE_URL } from "../api/axios";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -30,7 +31,7 @@ const ContactForm = () => {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:5000/api/leads/createlead", {
+      const res = await fetch(`${API_BASE_URL}/api/leads/createlead`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

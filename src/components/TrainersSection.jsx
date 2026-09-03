@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import api from "../api/axios";
+import api, { API_BASE_URL } from "../api/axios";
 
 // animation variants
 const containerVariants = {
@@ -87,7 +87,7 @@ const TrainersSection = () => {
                 <motion.img
                   src={
                     trainer.image
-                      ? `http://localhost:5000/uploads/trainers/${trainer.image}`
+                      ? `${API_BASE_URL}/uploads/trainers/${trainer.image}`
                       : "https://via.placeholder.com/400x500?text=Trainer"
                   }
                   alt={trainer.name}

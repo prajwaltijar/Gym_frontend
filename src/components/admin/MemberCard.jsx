@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import api from "../../api/axios";
 
 const MemberCard = ({ member, refresh, onEdit }) => {
@@ -23,41 +22,19 @@ const MemberCard = ({ member, refresh, onEdit }) => {
   const status = daysLeft > 0 ? "Active" : "Expired";
 
   return (
-    <motion.div
-      className="w-full flex items-center justify-between
-      bg-[#1c2533] border border-gray-800
-      rounded-xl px-5 py-3 hover:bg-[#243047] transition"
-    >
+    <div className="bg-gray-800 border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-yellow-500/20 hover:scale-105 transition-all duration-300">
 
-      {/* MEMBER INFO */}
-      <div className="flex items-center gap-3 w-[25%]">
-        <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white">
-          {member.customerName?.charAt(0)}
-        </div>
-
+      {/* Member Name + Status */}
+      <div className="flex justify-between items-start mb-3">
         <div>
-          <p className="text-white text-sm font-semibold">
+          <h2 className="text-2xl font-bold text-white">
             {member.customerName}
-          </p>
-          <p className="text-gray-400 text-xs">{member.mobile}</p>
+          </h2>
+          <p className="text-gray-400 text-sm">{member.mobile}</p>
         </div>
-      </div>
 
-      {/* PLAN */}
-      <div className="w-[15%] text-gray-300 text-sm">
-        {member.plan?.name || "No Plan"}
-      </div>
-
-      {/* GOAL / SERVICE */}
-      <div className="w-[20%] text-gray-400 text-sm">
-        {member.plan?.service?.title || "No Service"}
-      </div>
-
-      {/* STATUS */}
-      <div className="w-[10%]">
         <span
-          className={`px-3 py-1 rounded-full text-xs font-semibold
-          ${
+          className={`px-3 py-1 rounded-full text-xs font-semibold ${
             status === "Active"
               ? "bg-emerald-500/20 text-emerald-400"
               : "bg-red-500/20 text-red-400"
@@ -67,31 +44,44 @@ const MemberCard = ({ member, refresh, onEdit }) => {
         </span>
       </div>
 
-      {/* JOINED */}
-      <div className="w-[15%] text-gray-400 text-sm">
-        {new Date(member.admittedAt).toLocaleDateString("en-IN")}
+      {/* Plan */}
+      {member.plan && (
+        <p className="text-yellow-400 text-sm mb-2">
+          Plan: {member.plan?.name}
+        </p>
+      )}
+
+      {/* Service */}
+      {member.plan?.service && (
+        <p className="text-blue-400 text-sm mb-4">
+          Service: {member.plan?.service?.title}
+        </p>
+      )}
+
+      {/* Dates */}
+      <div className="text-gray-400 text-sm mb-4 space-y-1">
+        <p>Joined: {new Date(member.admittedAt).toLocaleDateString("en-IN")}</p>
+        <p>Expires: {new Date(member.endDate).toLocaleDateString("en-IN")}</p>
       </div>
 
-      {/* ACTIONS */}
-      <div className="w-[10%] flex gap-3 justify-end">
-
+      {/* Action Buttons */}
+      <div className="flex gap-3">
         <button
           onClick={() => onEdit(member)}
-          className="text-blue-400 hover:text-blue-300"
+          className="flex-1 px-4 py-2 rounded-xl text-sm font-medium bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 transition"
         >
-          ✏️
+          Edit
         </button>
 
         <button
           onClick={handleDelete}
-          className="text-red-400 hover:text-red-300"
+          className="flex-1 px-4 py-2 rounded-xl text-sm font-medium bg-red-500/20 text-red-300 hover:bg-red-500/30 transition"
         >
-          🗑
+          Delete
         </button>
-
       </div>
 
-    </motion.div>
+    </div>
   );
 };
 

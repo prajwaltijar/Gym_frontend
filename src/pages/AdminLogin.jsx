@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAdminAuth } from "../context/AdminAuthContext";
 
@@ -8,7 +8,7 @@ const AdminLogin = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  const { login, isAuthenticated } = useAdminAuth();
+  const { login } = useAdminAuth();
 
  const handleSubmit = async (e) => {
   e.preventDefault();
@@ -21,16 +21,8 @@ const AdminLogin = () => {
     return;
   }
 
-  navigate("/admin", { replace: true });
+  navigate("/admin/dashboard", { replace: true });
 };
-
-
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/admin", { replace: true });
-    }
-  }, [isAuthenticated, navigate]);
 
  return (
   <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-zinc-900 to-black text-white">

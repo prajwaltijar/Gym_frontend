@@ -258,7 +258,7 @@ const fetchLeadCount = async () => {
                 <p className="text-center text-3xl text-gray-300 py-10">No members found</p>
               )}
 
-        <div className="grid grid-cols-1 bg-[#0B192C] md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
            {filtered.map((member) => (
   <MemberCard
     key={member._id}
